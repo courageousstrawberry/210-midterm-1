@@ -118,64 +118,92 @@ public:
     // Function to delete a Node at a certain position.
     void delete_pos(int pos)
     {
+        // If there is no head of the list, the list is empty.
         if (!head)
         {
             cout << "List is empty." << endl;
             return;
         }
+        // If the position to delete is the first one, use the pop_front function.
         if (pos == 1)
         {
             pop_front();
             return;
         }
+        // Create a new temp pointer to the head.
         Node *temp = head;
+        // Loop through each value of the list until reaching the valid position.
         for (int i = 1; i < pos; i++)
         {
+            // If the temp pointer reaches the end of the list, the position doesn't exist.
             if (!temp)
             {
                 cout << "Position doesn't exist." << endl;
+                // Exit the function.
                 return;
             }
+            // Otherwise, continue looping through the list.
             else
                 temp = temp->next;
         }
+        // Once again, check if the temp pointer has reached the end of the list.
+        // Then the position doesn't exist. 
         if (!temp)
         {
             cout << "Position doesn't exist." << endl;
             return;
         }
+        // If there is no next value, the position is at the last value of the list.
         if (!temp->next)
         {
+            // Use the pop_back function to remove the value.
             pop_back();
             return;
         }
+        // Make a new node to point to the current's previous node.
         Node *tempPrev = temp->prev;
+        // Set the previous node's next pointer to the current node's next pointer (skip current node).
         tempPrev->next = temp->next;
+        // Set the next node's previous pointer the the previous node (skip current node).
         temp->next->prev = tempPrev;
+        // Delete the current node.
         delete temp;
     }
+    // Function to add a new node to the end of a linked list.
     void push_back(int v)
     {
+        // Create a new node with the new value.
         Node *newNode = new Node(v);
+        // If there is no tail, the list is empty.
         if (!tail)
+            // Set the head and tail of the list to equal the new node.
             head = tail = newNode;
         else
         {
+            // Set the tail's next pointer to the new node.
             tail->next = newNode;
+            // Set the new node's previous pointer to the tail.
             newNode->prev = tail;
+            // Make the new node to be the tail of the list.
             tail = newNode;
         }
     }
     // Function to add a new node to the beginning of a linked list.
     void push_front(int v)
     {
+        // Create a new node with the new value.
         Node *newNode = new Node(v);
+        // If there is no head, the list is empty.
         if (!head)
+            // Set the head and tail equal to the new node.
             head = tail = newNode;
         else
         {
+            // Set the new node's next value to the head.
             newNode->next = head;
+            // Set the head's previous value to the new node.
             head->prev = newNode;
+            // Make the new node the head of the list.
             head = newNode;
         }
     }
