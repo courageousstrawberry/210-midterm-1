@@ -85,23 +85,37 @@ public:
     // Function to delete a value from the list.
     void delete_val(int value)
     {
+        // Exit the function if the list is empty.
         if (!head)
             return;
+        // Set a temporary node pointing to head.
         Node *temp = head;
+        // Loop through the linked list, until it reaches the correct value to delete.
         while (temp && temp->data != value)
             temp = temp->next;
+        // If the value wasn't found, exit the list.
         if (!temp)
             return;
+        // If there is a previous node,
+        // set the previous node's next value to the current node's next value (skip the current node).
         if (temp->prev)
             temp->prev->next = temp->next;
+        // If there isn't a previous value, then the current value to delete is at the head of the list.
+        // S0, et the head equal to the next value.
         else
             head = temp->next;
+        // If there is a next node,
+        // Set the next nodes's previous pointer to the current node's previous pointer (skip current node).
         if (temp->next)
             temp->next->prev = temp->prev;
+        // If there isn't a next node, then the current pointer is at the tail.
+        // Set the tail equal to the previous node.
         else
             tail = temp->prev;
+        // Delete the temporary pointer.
         delete temp;
     }
+    // Function to delete a Node at a certain position.
     void delete_pos(int pos)
     {
         if (!head)
@@ -207,32 +221,44 @@ public:
             delete temp;
         }
     }
+    // Function to print the list.
     void print()
     {
+        // Set a pointer to the head of the list.
         Node *current = head;
+        // If the head doesn't exist, the list is empty.
         if (!current)
         {
             cout << "List is empty." << endl;
             return;
         }
+        // Loop through the list from the head to the tail.
         while (current)
         {
+            // Print the value of the node.
             cout << current->data << " ";
+            // Set current to the next node in the list.
             current = current->next;
         }
         cout << endl;
     }
+    // Function to print the list reversed.
     void print_reverse()
     {
+        // Set a pointer to the tail of the list.
         Node *current = tail;
+        // If it doesn't exist, then the list is empty.
         if (!current)
         {
             cout << "List is empty." << endl;
             return;
         }
+        // Loop through each value of the list, from the tail to the head.
         while (current)
         {
+            // Print the value of the node.
             cout << current->data << " ";
+            // Set current to the previous node.
             current = current->prev;
         }
         cout << endl;
