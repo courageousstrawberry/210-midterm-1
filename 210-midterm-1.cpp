@@ -166,6 +166,7 @@ public:
             tail = newNode;
         }
     }
+    // Function to add a new node to the beginning of a linked list.
     void push_front(int v)
     {
         Node *newNode = new Node(v);
@@ -178,46 +179,69 @@ public:
             head = newNode;
         }
     }
+    // Function to remove a node from the beginning of a linked list.
     void pop_front()
     {
+        // If there is no head, the list is empty.
         if (!head)
         {
             cout << "List is empty." << endl;
             return;
         }
+        // Set a temporary pointer to the beginning of the list.
         Node *temp = head;
+        // If there is a next node,
         if (head->next)
         {
+            // Set the new head to the next node.
             head = head->next;
+            // Set the new head's previous value to nullptr.
             head->prev = nullptr;
         }
+        // Otherwise, there is only one node in the list.
         else
+            // Set the head and tail of the list equal to nullptr.
             head = tail = nullptr;
+        // Delete the old head of the list.
         delete temp;
     }
+    // Function to remove a node from the end of a linked list.
     void pop_back()
     {
+        // If there is no tail, the list is empty.
         if (!tail)
         {
             cout << "List is empty." << endl;
             return;
         }
+        // Set a temporary pointer to the end of the list.
         Node *temp = tail;
+        // If there is a previous node,
         if (tail->prev)
         {
+            // Set the new tail to the previous node.
             tail = tail->prev;
+            // Set the new tail's next pointer to nullptr.
             tail->next = nullptr;
         }
         else
+            // Otherwise, the node is the only one in the list.
+            // Make the head and the tail to  nullptr.
             head = tail = nullptr;
+        // Delete the old tail node.
         delete temp;
     }
+    // Destructor for the doubly linked list.
     ~DoublyLinkedList()
     {
+        // While there is a head of the list, loop through the nodes of the list.
         while (head)
         {
+            // Set a temporary pointer at the head.
             Node *temp = head;
+            // Set the head to point to the next value of the list.
             head = head->next;
+            // Delete the temporary pointer (and previous head value).
             delete temp;
         }
     }
