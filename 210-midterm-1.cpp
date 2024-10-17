@@ -315,9 +315,33 @@ public:
         }
         cout << endl;
     }
+    // Function to print every other element of the linked list.
+    void every_other_element() {
+        int count = 0;
+        Node *temp = head;
+        if (!temp) {
+            cout << "List is empty." << endl;
+            return;
+        }
+        while (temp) {
+            if (count%2==0){
+                cout << temp->data << ", ";
+            }
+            count++;
+            temp = temp->next;
+        }
+        delete temp;
+    }
 };
 int main()
 {
-    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS; // dummy statement to avoid compiler warning 
+    cout << MIN_NR + MIN_LS + MAX_NR + MAX_LS << endl;; // dummy statement to avoid compiler warning 
+    DoublyLinkedList values;
+    values.insert_after(5, 0);
+    values.push_back(6);
+    values.push_back(7);
+    values.push_back(8);
+    values.push_back(9);
+    values.every_other_element();
     return 0;
 }
