@@ -1,43 +1,60 @@
 #include <iostream>
 using namespace std;
+
 const int MIN_NR = 10, MAX_NR = 99, MIN_LS = 5, MAX_LS = 20;
+
 class DoublyLinkedList
 {
+// Private section for a doubly linked list.
 private:
+    // Create a new struct to define a node within the class.
     struct Node
     {
-        int data;
-        Node *prev;
-        Node *next;
+        int data; // Stores a value.
+        Node *prev; // Points to previous node in list.
+        Node *next; // Points to next node in list.
+        // Parameter constructor for a node.
         Node(int val, Node *p = nullptr, Node *n = nullptr)
         {
+            // Initiate the values for the data, the previous node, and the next node.
             data = val;
             prev = p;
             next = n;
         }
     };
+    // Node variable for the head of the list.
     Node *head;
+    // Node variable for the tail of the list.
     Node *tail;
 
+// Public member functions of the doubly linked list class.
 public:
+    // Default constructor.
     DoublyLinkedList()
     {
+        // Set both the head pointer and tail pointer of the list to nullptr.
         head = nullptr;
         tail = nullptr;
     }
+    // Function to insert a value after a certain position in the linked list.
     void insert_after(int value, int position)
     {
+        // Check for invalid, negative position values.
         if (position < 0)
         {
             cout << "Position must be >= 0." << endl;
             return;
         }
+        // Create a newNode that holds the value.
         Node *newNode = new Node(value);
+        // If the list doesn't have a head, then it is empty.
+        // Turn the newNode into the head and tail of the linked list.
         if (!head)
         {
             head = tail = newNode;
             return;
         }
+        // Otherwise, 
         Node *temp = head;
         for (int i = 0; i < position && temp; ++i)
             temp = temp->next;
