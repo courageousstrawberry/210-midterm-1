@@ -317,17 +317,24 @@ public:
     }
     // Function to print every other element of the linked list.
     void every_other_element() {
+        // Set counter variable.
         int count = 0;
+        // Temporary pointer to the head.
         Node *temp = head;
+        // If there is no head, the list is empty.
         if (!temp) {
             cout << "List is empty." << endl;
             return;
         }
+        // Loop through each value in the list.
         while (temp) {
+            // If count is even, output the value.
             if (count%2==0){
                 cout << temp->data << ", ";
             }
+            // Increment count.
             count++;
+            // Set temp to the next value of the list.
             temp = temp->next;
         }
         delete temp;
