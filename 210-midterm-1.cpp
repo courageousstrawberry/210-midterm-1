@@ -54,24 +54,35 @@ public:
             head = tail = newNode;
             return;
         }
-        // Otherwise, 
+        // Otherwise, create a new temporary pointer that points to the head of the list.
         Node *temp = head;
+        // Loop through the linked list until the correct position is reached,
+        // or until the end of the list is reached.
         for (int i = 0; i < position && temp; ++i)
             temp = temp->next;
+        // If temp, reaches the end of the list, it's an invalid position and output an error.
         if (!temp)
         {
             cout << "Position exceeds list size. Node not inserted.\n";
+            // Delete the new node.
             delete newNode;
             return;
         }
+        // If temp reaches the correct position, insert the newNode between the previous and next nodes in the list.
+        // Set the next pointer of newNode to the next pointer of temp (next node in list).
         newNode->next = temp->next;
+        // Set the previous pointer of newNode to point at temp (current node of list)
         newNode->prev = temp;
+        // If there is still a value after temp, make the next node's, previous pointer point to newNode.
         if (temp->next)
             temp->next->prev = newNode;
+        // If there isn't a value after temp, newNode is the tail of the list.
         else
             tail = newNode;
+        // Make the current node's next pointer point to the newNode.
         temp->next = newNode;
     }
+    // Function to delete a value from the list.
     void delete_val(int value)
     {
         if (!head)
